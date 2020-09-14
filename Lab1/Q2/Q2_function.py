@@ -8,8 +8,8 @@ import scipy.constants as spc
 import numpy as np
 
 def Population(x_0, r, p):
-    x = [None] * p
-    x[0] = x_0
+    x = [None] * p                      #initialize x as an array
+    x[0] = x_0                          #take initial value
     for i in range(0, p-1):
-        x[i+1] = r * (1 - x[i]) * x[i]
+        x[i+1] = r * (1 - x[i]) * x[i]  #iteration
     return x

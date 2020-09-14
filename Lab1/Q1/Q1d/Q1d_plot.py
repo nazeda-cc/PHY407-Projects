@@ -20,8 +20,8 @@ dt = 31622400 * 0.0001
 t = 31622400
 
 #Simulation
-result  = ec(x_0, y_0, vx_0, vy_0, dt, t)
-result_gr  = gr(x_0, y_0, vx_0, vy_0, dt, t)
+result  = ec(x_0, y_0, vx_0, vy_0, dt, t)           #Newton
+result_gr  = gr(x_0, y_0, vx_0, vy_0, dt, t)        #GR
 
 
 #Convert back into AU & year
