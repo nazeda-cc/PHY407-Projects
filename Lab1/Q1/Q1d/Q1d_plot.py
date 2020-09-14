@@ -33,13 +33,7 @@ vy = [i * 31622400 / spc.au for i in result[3]]
 x_gr = [i / spc.au for i in result_gr[0]]
 y_gr = [i / spc.au for i in result_gr[1]]
 
-'''
-x_f = x[int(t/dt)-1]
-y_f = y[int(t/dt)-1]
-vx_f = vx[int(t/dt)-1]
-vy_f = vy[int(t/dt)-1]
-print(x_f, y_f, vx_f, vy_f)
-'''
+
 
 
 #Plot the orbit
@@ -53,17 +47,3 @@ plt.ylabel('$y$ (AU)')
 plt.title('Orbit, $x$ vs $y$')
 
 
-'''
-#Plot vx vs x
-plt.plot(x,vx)
-plt.xlabel('$x$ (AU)')
-plt.ylabel('$v_x$ (AU/yr)')
-plt.title('$v_x$ vs $x$')
-'''
-'''
-#Plot vy vs y
-plt.plot(y,vy)
-plt.xlabel('$y$ (AU)')
-plt.ylabel('$v_y$ (AU/yr)')
-plt.title('$v_y$ vs $y$')
-'''
