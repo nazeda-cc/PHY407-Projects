@@ -61,7 +61,7 @@ plt.ylabel('$x_p$')
 ###Q2d inc = 0.005#######
 p = 2000
 x = []
-r = np.arange(2, 4.1, 0.005)
+r = np.arange(2, 4.005, 0.005)
 for i in r:
     x.append(popu(0.1, i, p))
 
