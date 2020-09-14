@@ -58,6 +58,7 @@ plt.xlabel('r')
 plt.ylabel('$x_p$')
 ########################
 '''
+'''
 ###Q2d inc = 0.005#######
 p = 2000
 x = []
@@ -84,6 +85,26 @@ plt.plot(s[0],s[1], 'k.', markersize = 0.05)
 plt.title('$x_p$ vs r plot (increment = 0.005)')
 plt.xlabel('r')
 plt.ylabel('$x_p$')
+'''
+###Q2e inc = 10e-5#######
+p = 2000
+x = []
+r = np.arange(3.738, 3.745, 0.00001)
+for i in r:
+    x.append(popu(0.1, i, p))
 
+s = [[],[]]
+
+for i in r:
+    ind = np.where(r==i)[0][0]
+    for j  in np.arange(1999,1000,-1):
+        s[0].append(i)
+        s[1].append(x[ind][j])
+        
+
+plt.plot(s[0],s[1], 'k.', markersize = 0.05)
+plt.title('$x_p$ vs r plot (increment = $10^{-5}$)')
+plt.xlabel('r')
+plt.ylabel('$x_p$')
 
 
