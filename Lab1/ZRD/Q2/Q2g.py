@@ -24,14 +24,16 @@ delta = []
 f = []
 year = np.arange(0,p,1)
 
+#calculate difference
 for i in range(p):
     delta.append(abs(x_2[i]-x_1[i]))
-    
+
+#calculate fit function
 for i in range(p):
     f.append(fit(12**-8, 0.35, i))
     
 plt.plot(year, delta, label = '$\delta$')
-plt.plot(year, f, label = 'fit, $12^{-8}e^{\lambda p}$')
+plt.plot(year, f, label = 'fit, $12^{-8}e^{0.35p}$')
 plt.legend()
 print(len(f))
 plt.xlabel('p (years)')
