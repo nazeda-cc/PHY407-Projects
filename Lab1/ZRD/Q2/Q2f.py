@@ -11,9 +11,9 @@ from Q2_function import Population as popu
 from random import random
 
 r = 3.738
-p = 200                                     #set iterations
+p = 75                                     #set iterations
 x0_1 = 0.1
-epsilon = random()*10**-5                   #generate random epsilon
+epsilon = random()*10**-8                   #generate random epsilon
 x0_2 = x0_1 + epsilon
 
 x_1 = popu(x0_1, r, p)                      #iteration
