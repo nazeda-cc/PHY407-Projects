@@ -38,7 +38,7 @@ for i in range(2,N):
     end = time()
     diff = end - start
     d_1.append(diff)
-'''
+
 ####Plot vs N#####
 plt.plot(Nx, d_0, label = 'Text book method')
 plt.plot(Nx, d_1, label = 'numpy.dot')
@@ -46,9 +46,9 @@ plt.xlabel('N')
 plt.ylabel('time (s)')
 plt.title('Run time vs N')
 plt.legend()
+
 '''
 #####Plot vs N^3####
-
 for i in range(0,N-2):
     Nx[i] = Nx[i]**3
     
@@ -58,3 +58,4 @@ plt.xlabel('N$^3$')
 plt.ylabel('time (s)')
 plt.title('Run time vs N$^3$')
 plt.legend()
+'''
