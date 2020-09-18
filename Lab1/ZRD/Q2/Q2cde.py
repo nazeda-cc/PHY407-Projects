@@ -34,7 +34,7 @@ plt.title('Q2c Population Evolution History with different r')
 ####################
 
 
-'''
+
 ###Q2d inc = 0.1####
 p = 2000
 x = []
@@ -54,14 +54,13 @@ for i in range(10, 20):
         s[0].append(r[i])
         s[1].append(x[i][j])
         
-
+plt.figure(1)
 plt.plot(s[0],s[1], 'k.', markersize = 0.1)
 plt.title('$x_p$ vs r plot (increment = 0.1)')
 plt.xlabel('r')
 plt.ylabel('$x_p$')
 ########################
-'''
-'''
+
 ###Q2d inc = 0.005#######
 p = 2000
 x = []
@@ -83,13 +82,12 @@ for i in r:
             s[0].append(i)
             s[1].append(x[ind][j])
         
-
+plt.figure(2)
 plt.plot(s[0],s[1], 'k.', markersize = 0.05)
 plt.title('$x_p$ vs r plot (increment = 0.005)')
 plt.xlabel('r')
 plt.ylabel('$x_p$')
-'''
-'''
+
 ###Q2e inc = 10e-5#######
 p = 2000
 x = []
@@ -105,10 +103,11 @@ for i in r:
         s[0].append(i)
         s[1].append(x[ind][j])
         
-
+plt.figure(3)
 plt.plot(s[0],s[1], 'k.', markersize = 0.05)
 plt.title('$x_p$ vs r plot (increment = $10^{-5}$)')
 plt.xlabel('r')
 plt.ylabel('$x_p$')
 ##########################
-'''
+plt.shwo()
+
