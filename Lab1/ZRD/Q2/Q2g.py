@@ -35,7 +35,6 @@ for i in range(p):
 plt.plot(year, delta, label = '$\delta$')
 plt.plot(year, f, label = 'fit, $12^{-8}e^{0.35p}$')
 plt.legend()
-print(len(f))
 plt.xlabel('p (years)')
 plt.ylabel('x')
 plt.title('Q2g Difference fit plot')
