@@ -8,7 +8,7 @@ import scipy.constants as spc
 import numpy as np
 from matplotlib import pyplot as plt
 from random import random
-from Q3_mult import mult
+from Lab1_Q3_mult import mult
 from time import time
 
 N = 160
