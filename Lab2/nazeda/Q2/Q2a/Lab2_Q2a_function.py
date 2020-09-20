@@ -19,7 +19,7 @@ def Trap(f, a, b, n):
     return integral * h
 ###############################
 
-######Simpson method###########
+######Simpsons method###########
 def Simp(f, a, b, n):
     
     h = (b - a) / n
@@ -42,7 +42,7 @@ def expo_neg(t):
     return np.exp(-t**2)    
 #################################################
 
-#############Dawson's function################
+#############Dawson's function###################
 def Daws(x, n, method):
     
     #Due to the integral method we use, it only supports input to be
@@ -50,6 +50,7 @@ def Daws(x, n, method):
 
     x = complex(x)
     if method == 'Trap':
+        #apply Trapezoidal method
         integral_real = Trap(expo, 0, x.real, n)            #calculate real part
         integral_imag = Trap(expo_neg, 0, x.imag, n)        #calculate imaginary part
         return (np.exp(-x.real**2) * integral_real,         #return result a complex number
@@ -57,31 +58,16 @@ def Daws(x, n, method):
     
     
     elif method == 'Simp':
+        #apply Simpsons method
         integral_real = Simp(expo, 0, x.real, n)            #calculate real part
-        integral_imag = Trap(expo_neg, 0, x.imag, n)        #calculate imaginary part
-        return (np.exp(-x.real**2) * integral_real,  #return result a complex number
+        integral_imag = Simp(expo_neg, 0, x.imag, n)        #calculate imaginary part
+        return (np.exp(-x.real**2) * integral_real,         #return result a complex number
                 np.exp(x.imag**2) * integral_imag)
     
     elif method == 'Scipy':
-        #return special.dawsn(x)
+        #use scipy library
         return (special.dawsn(x.real), 
                 (special.dawsn(x.imag * 1j)).imag)
     
     else:
         return 'Input error :D'
-'''        
-    if sign == '-':
-        if method == 'Trap':
-            integral = Trap(expo_neg, 0, x, n)
-            return np.exp(-x**2) * integral
-    
-        elif method == 'Simp':
-            integral = Simp(expo_neg, 0, x, n)
-            return np.exp(-x**2) * integral
-    
-        elif method == 'Scipy':
-            return special.dawsn(x)
-    
-        else:
-            return 'Input error :D'
-'''
