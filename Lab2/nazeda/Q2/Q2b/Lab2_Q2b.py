@@ -94,7 +94,7 @@ for i in range(0,2001):
 plt.figure(figsize = (10,8))  
 x = np.arange(-1000, 1001, 1)       #create axies for the plot
 y = np.arange(-1000, 1001, 1)    
-c = plt.pcolormesh(x, y, P, vmax = 0.01)    #set max intensity at 0.01 for best sensitivity
+c = plt.pcolormesh(x, y, P, vmax = 0.01, shading='nearest')    #set max intensity at 0.01 for best sensitivity
 plt.colorbar(c, label = 'Light Intensity')
 plt.xlabel('$nm$')
 plt.ylabel('$nm$')

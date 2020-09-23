@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Sep 23 11:17:07 2020
+Created on Sun Sep 20 11:56:16 2020
 
 @author: rundo
 """
@@ -34,26 +34,40 @@ def Simp(f, a, b, n):
 
 ######exponential for integral inside Dawson's function########
 def expo(t):
+    #for real part
     return np.exp(t**2)
+
+def expo_neg(t):
+    #for imaginary part
+    return np.exp(-t**2)    
 #################################################
 
 #############Dawson's function###################
 def Daws(x, n, method):
     
+    #Due to the integral method we use, it only supports input to be
+    #pure real or pure imaginary.
+
+    x = complex(x)
     if method == 'Trap':
         #apply Trapezoidal method
-        integral_real = Trap(expo, 0, x, n)            
-        return np.exp(-x**2) * integral_real         
+        integral_real = Trap(expo, 0, x.real, n)            #calculate real part
+        integral_imag = Trap(expo_neg, 0, x.imag, n)        #calculate imaginary part
+        return (np.exp(-x.real**2) * integral_real,         #return result a complex number
+                np.exp(x.imag**2) * integral_imag) 
     
     
     elif method == 'Simp':
         #apply Simpsons method
-        integral_real = Simp(expo, 0, x, n)            
-        return np.exp(-x**2) * integral_real    
+        integral_real = Simp(expo, 0, x.real, n)            #calculate real part
+        integral_imag = Simp(expo_neg, 0, x.imag, n)        #calculate imaginary part
+        return (np.exp(-x.real**2) * integral_real,         #return result a complex number
+                np.exp(x.imag**2) * integral_imag)
     
     elif method == 'Scipy':
         #use scipy library
-        return special.dawsn(x)
+        return (special.dawsn(x.real), 
+                (special.dawsn(x.imag * 1j)).imag)
     
     else:
         return 'Input error :D'
