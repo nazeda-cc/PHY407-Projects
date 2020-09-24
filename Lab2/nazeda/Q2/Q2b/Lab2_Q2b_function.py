@@ -6,7 +6,7 @@ Created on Mon Sep 21 19:51:53 2020
 """
 import numpy as np
 import scipy as sp
-from scipy import special
+#from scipy import special
 
 ######Simpsons method###########
 def Simp(f, m, x, n):       #for bessel function, a = 0 and b = pi

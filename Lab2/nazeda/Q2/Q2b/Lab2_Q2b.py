@@ -11,7 +11,7 @@ from matplotlib import pyplot as plt
 from Lab2_Q2b_function import *
 
 ######################## b i #################################################
-x = np.arange(0, 20, 0.1)
+x = np.arange(0, 20, 0.1)   #plot from 0 to 20 with 0.1 interval
 y0 = []                     #initiate arraysfor J0, J1, J2
 y1 = []
 y2 = []
@@ -37,14 +37,16 @@ plt.title('Q2b, plot of $J_0$, $J_1$, and $J_2$, textbood Ex5.4(a)')
 ##############################################################################
 
 ######################## b ii ################################################
-x = np.arange(0, 20, 0.1)
+x = np.arange(0, 0.25, 0.001)
 y0 = []
 y1 = []
+
 
 for i in x:                 #Calculate values for J0, with my own bessel func.
     y0.append(J(0, i))
 
-#Plot against scipy.special.jv(0,x)
+
+#Plot with scipy.special.jv(0,x)
 plt.figure(2)
 plt.plot(x, special.jv(0, x), label = 'scipy.special.jv(0,x)') #calculate & plot with scipy special func.
 plt.plot(x, y0, label = 'My function J(0,x)')
@@ -57,7 +59,7 @@ plt.show()
 for i in x:                 #Calculate values for J1, with my own bessel func.
     y1.append(J(1, i))
 
-#Plot against scipy.special.jv(1,x)
+#Plot with scipy.special.jv(1,x)
 plt.figure(3)
 plt.plot(x, special.jv(1, x), label = 'scipy.special.jv(1,x)')  #calculate & plot with scipy special func.
 plt.plot(x, y1, label = 'My function J(1,x)')
@@ -65,7 +67,15 @@ plt.xlabel('$x$')
 plt.ylabel('$J_1(x)$')
 plt.legend()
 plt.title('Comparison between my bessel and scipy.special.jv, for $J_1(x)$')
-plt.show()    
+plt.show()
+
+#Calculate the actual difference between my bessel and scipy.special.jv
+print('Difference between my Bessel and scipy.special.jv with m=0, x=0:', 
+      J(0,0) - special.jv(0,0))
+print('Difference between my Bessel and scipy.special.jv with m=2, x=2:', 
+      J(2,2) - special.jv(2,2))
+print('Difference between my Bessel and scipy.special.jv with m=1, x=2.5:', 
+      J(1,2.5) - special.jv(1,2.5))
 ##############################################################################
 
 
@@ -90,13 +100,23 @@ for i in range(0,2001):
                                                 #because of symmetry. tones of times saved!
         
 
-
+#plot with pcolormesh()
 plt.figure(figsize = (10,8))  
 x = np.arange(-1000, 1001, 1)       #create axies for the plot
 y = np.arange(-1000, 1001, 1)    
-c = plt.pcolormesh(x, y, P, vmax = 0.01, shading='nearest')    #set max intensity at 0.01 for best sensitivity
-plt.colorbar(c, label = 'Light Intensity')
-plt.xlabel('$nm$')
-plt.ylabel('$nm$')
+plt.pcolormesh(x, y, P, vmax = 0.01, shading='nearest')    #set max intensity at 0.01 for best sensitivity
+plt.colorbar(label = 'Light Intensity')
+plt.xlabel('$nm$', fontsize = 15)
+plt.ylabel('$nm$', fontsize = 15)
 plt.title('Q2b Diffraction Plot with pcolormesh')
+plt.show()
+
+#plot with imshow()
+plt.figure(figsize = (10,8))
+plt.imshow(P, vmax = 0.01, extent = [-1000 , 1000, -1000 , 1000], cmap = 'inferno')
+plt.colorbar(label = 'Light Intensity')
+plt.title('Q2b Diffraction Plot with imshow')
+plt.xlabel('$nm$', fontsize = 15)
+plt.ylabel('$nm$', fontsize = 15)
+plt.title('Q2b Diffraction Plot with imshow')
 plt.show()
