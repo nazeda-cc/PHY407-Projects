@@ -11,7 +11,7 @@ import scipy as sp
 ######Simpsons method###########
 def Simp(f, m, x, n):       #for bessel function, a = 0 and b = pi
                             #so instead of taking a & b, this simpson's method 
-                            #takes parameters x and m
+                            #function takes parameters x and m 
     h = (np.pi - 0) / n
     integral = f(0, m, x) + f(np.pi, m, x)
     for i in range(1, n, 2):

@@ -14,7 +14,7 @@ from time import time
 ############# a i ############################################################
 print('----------Q2a i----------')
 x = 4
-n = 8
+n = 8           #set N=8 slices
 print('D(4), Trapezoidal rule: ', Daws(x, n, 'Trap'))
 print('D(4), Simpsons rule: ', Daws(x, n, 'Simp'))
 print('D(4), Scipy special function: ', Daws(x, n, 'Scipy'))
@@ -108,12 +108,12 @@ n_1 = 32
 n_2 = 64
 
 #Trapezoidal method
-I1_trap = Daws(x, n_1, 'Trap')
+I1_trap = Daws(x, n_1, 'Trap')          #calculate I1 and I2
 I2_trap = Daws(x, n_2, 'Trap')
 error_trap = abs(I2_trap - I1_trap) / 3
 
 #Simpson's method
-I1_simp = Daws(x, n_1, 'Simp')
+I1_simp = Daws(x, n_1, 'Simp')          #calculate I1 and I2
 I2_simp = Daws(x, n_2, 'Simp')
 error_simp = abs(I2_simp - I1_simp) / 15
 print('----------Q2a iii----------')
