@@ -40,13 +40,17 @@ def gaussxwab(N,a,b):
 #############################################
 
 def P(u, T_a, t):
-    delta = 4.3 + 0.145 * T_a + 0.00196 * (T_a**2)
-    u_avg = 11.2 + 0.365 * T_a + 0.00706 * (T_a**2) + 0.9 * np.log(t)
+    result = []
+    for k in T_a:
+        delta = 4.3 + 0.145 * k + 0.00196 * (k**2)
+        u_avg = 11.2 + 0.365 * k + 0.00706 * (k**2) + 0.9 * np.log(t)
     
-    N = 100
-    x, w = gaussxwab(N, 0, u)
-    integral = 0
-    for i in range(N):
-        integral += w[i] * np.exp(-(u_avg - x[i])**2 / (2 * delta**2))
+        N = 100
+        x, w = gaussxwab(N, 0, u)
+        integral = 0
+        for i in range(N):
+            integral += w[i] * np.exp(-(u_avg - x[i])**2 / (2 * delta**2))
+        
+        result.append(integral / (np.sqrt(2*np.pi) * delta))
     
-    return integral / (np.sqrt(2*np.pi) * delta)
+    return result
