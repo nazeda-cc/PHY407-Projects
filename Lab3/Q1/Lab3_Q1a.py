@@ -45,7 +45,7 @@ plt.semilogy()
 plt.legend()
 plt.ylabel('Relative error')
 plt.xlabel('$n$, Powers of $N=2^n$')
-plt.title('Relative error from scipy.speical.dawsn(4)')
+plt.title('Relative (true) error from scipy.speical.dawsn(4)')
 plt.show()
 
 #Calculated error with textbook eqn.
@@ -53,7 +53,7 @@ calculated_error_trap = []
 calculated_error_simp = []
 calculated_error_gauss = []
 
-n = np.arange(0, 13, 1)
+n = np.arange(1, 14, 1)
 for i in n:
     N_1 = 2**i
     N_2 = 2**(i+1)
