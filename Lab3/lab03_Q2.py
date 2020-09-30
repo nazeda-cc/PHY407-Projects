@@ -8,7 +8,7 @@ Created on Wed Sep 30 01:31:49 2020
 
 import numpy as np
 import matplotlib.pyplot as plt
-from lab02_Q2functions import psi, mean_xsq, mean_psq, energy
+from lab03_Q2functions import psi, mean_xsq, mean_psq, energy
 
 # define array of x 
 xrange = np.arange(-4, 4, 0.01)
