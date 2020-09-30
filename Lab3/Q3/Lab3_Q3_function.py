@@ -122,3 +122,57 @@ def intensity(grad, phi):
             intens[i][j] = - (np.cos(phi) * grad[i][j][1] + 
                              np.sin(phi) * grad[i][j][0]) / n
     return intens
+
+'''
+def show_location(location, w):
+    location_on_grid = [0, 0]
+    location_on_grid[0] = int((47 - location[0]) * 1200)    #y axis
+    location_on_grid[1] = int((location[1] - 6) * 1200)     #x axis
+    
+    result_w = np.ones([200,200], float)*0
+    result_intensity = np.ones([200,200], float)*0
+    
+    if location[0] < 100:
+        if location[1] < 100:
+            for i in range(0, 200):
+                for j in range(0, 200):
+                    result_w[i][j] = w[i][j]
+            
+        elif location[1] > 1100:
+            for i in range(0, 200):
+                for j in range(0, 200):
+                    result_w[i][j] = w[i][1000+j]
+        
+        else:
+            for i in range(0, 200):
+                for j in range(0, 200):
+                    result_w[i][j] = w[i][location_on_grid[0]-100+j]
+    
+    elif location[0] > 1100:
+        if location[1] < 100:
+            for i in range(0, 200):
+                for j in range(0, 200):
+                    result_w[i][j] = w[1000+i][j]
+            
+        elif location[1] > 1100:
+            for i in range(0, 200):
+                for j in range(0, 200):
+                    result_w[i][j] = w[1000+i][1000+j]
+        
+        else:
+            for i in range(0, 200):
+                for j in range(0, 200):
+                    result_w[i][j] = w[1000+i][location_on_grid[0]-100+j]
+    
+    else:
+        if location[1] < 100:
+            
+            
+        elif location[1] > 1100:
+            
+        
+        else:
+            
+    
+    return 
+'''
