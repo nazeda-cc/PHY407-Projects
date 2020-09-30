@@ -89,6 +89,7 @@ def Daws(x, n, method):
         return special.dawsn(x)
     
     elif method == 'Gauss':
+        #apply gauss method
         integral = 0
         s, w = gaussxwab(n, 0, x)
         for i in range(n):

@@ -117,9 +117,9 @@ def intensity(grad, phi):
     for i in range(1201):
         for j in range(1201):
         
-            phi = - 5 * np.pi / 6
+            #phi = - 5 * np.pi / 6
             n = np.sqrt(grad[i][j][0]**2 + grad[i][j][1]**2 + 1)
-            intens[i][j] = - (np.cos(phi) * grad[i][j][1] + 
+            intens[i][j] = - (-np.cos(phi) * grad[i][j][1] + 
                              np.sin(phi) * grad[i][j][0]) / n
     return intens
 

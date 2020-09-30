@@ -37,6 +37,7 @@ plt.figure('contour', figsize = (12, 9))
 latitude = np.linspace(47, 46, 1201)
 longitude = np.linspace(6, 7, 1201)
 plt.contourf(longitude, latitude, w, cmap = 'terrain', vmax = 3200, vmin = 400)
+plt.colorbar(label = 'Altitude (m)')
 
 plt.scatter(6.14, 46.2, c = 'r', s = 150)
 plt.text(6.16, 46.2, 'Geneva', fontsize = 17, color = 'w')
@@ -50,9 +51,10 @@ plt.text(6.63, 46.52, 'Lausanne', fontsize = 17, color = 'w')
 plt.scatter(6.59, 46.4, c = 'r', s = 150)
 plt.text(6.61, 46.4, 'Evian', fontsize = 17, color = 'w')
 
-plt.colorbar(label = 'Altitude (m)')
+
 plt.xlabel('Longitude, $^{\circ} E$', fontsize  = 15)
 plt.ylabel('Latitude, $^{\circ} N$', fontsize  = 15)
+plt.title('Lake Geneva contour plot')
 plt.show()
 
 #imshow
@@ -61,26 +63,23 @@ plt.imshow(w, extent = [6, 7, 46, 47], cmap = 'terrain', vmax = 3200, vmin = 400
 plt.colorbar(label = 'Altitude (m)')
 plt.xlabel('Longitude, $^{\circ} E$', fontsize  = 15)
 plt.ylabel('Latitude, $^{\circ} N$', fontsize  = 15)
+plt.title('Lake Geneva more delicate plot')
 plt.show()
 
 
-####
-plt.figure('zoom')
-plt.margins(x=6.2, y=46.2)
-plt.contourf(longitude, latitude, w, cmap = 'terrain', vmax = 3200, vmin = 400)
-plt.show()
 
 grad = gradient(w, h)
 
 
-phi = - 5 * np.pi / 6
+phi = np.pi / 6
 intens = intensity(grad, phi)
 
 plt.figure('intensity', figsize = (12, 9))        
-plt.imshow(intens, vmax = 0.2, vmin = -0.2, extent = [6, 7, 46, 47], cmap = 'gray')
+plt.imshow(intens, vmax = 0.01, vmin = -0.01, extent = [6, 7, 46, 47], cmap = 'gray')
 plt.colorbar(label = 'Intensity')
 plt.xlabel('Longitude, $^{\circ} E$', fontsize  = 15)
 plt.ylabel('Latitude, $^{\circ} N$', fontsize  = 15)
+plt.title('Light intensity plot from southwest')
 plt.show()
 
 
