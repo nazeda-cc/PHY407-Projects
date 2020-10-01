@@ -33,6 +33,7 @@ plt.xlabel('x', fontsize=15)
 plt.ylabel('$\psi_n(x)$', fontsize=15)
 plt.title('Wavefunction for n = 30')
 
+
 # calculate and print uncertainties in position and momentum, and energy
 for e in range(0, 16):
     print('n = %02d, sqrt(<x^2>)=%.3f, sqrt(<p^2>)=%.3f, E=%.3f' 
