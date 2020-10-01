@@ -42,6 +42,20 @@ def psi(n, x):
     
 
 
+def dpsidx(n, x):
+    """ Function to compute wavefunction in nth energy level of 1-D
+    quantum harmonic oscillator.
+    INPUT:
+        n [integer]: number of energy level
+        x [float]: position variable
+        
+    OUTPUT:
+        dpsidx [float]: wavefunction derivative calculated
+    """
+    dpsidx = 1/(np.sqrt(2**n*np.math.factorial(n)*np.sqrt(np.pi)))*np.exp(-x**2/2)*(x*H(n, x)-H(n+1, x))
+    return dpsidx
+
+
 def gaussxw(N):
     """ Function to do Gaussian sampling between -1 and 1
     INPUT:
@@ -127,22 +141,6 @@ def integrate(function, n):
     return I
 
 
-def dpsidx(n, z):
-    """ Function to do derivative using central differences
-    
-    INPUT:
-        n [integer]: energy level
-        z [float]: transformed x variable
-    OUTPUT:
-        dfdx [float]: derivatives
-    """
-    h = 1e-8
-    newx = z/(1-z**2)
-    xprev = newx - h
-    xnext = newx + h
-    dfdx = (psi(n, xnext) - psi(n, xprev)) / (2*h)
-    dfdx = dfdx**2*(1+z**2)/(1-z**2)**2
-    return dfdx
 
 
 def xpsi_sq(n, z):
@@ -157,6 +155,20 @@ def xpsi_sq(n, z):
     newx = z/(1-z**2)
     xpsi_sq = (newx)**2*psi(n, newx)**2*(1+z**2)/(1-z**2)**2
     return xpsi_sq
+
+
+def dpsidx_sq(n, z):
+    """ Function to do squared x*wavefunction
+    
+    INPUT:
+        n [integer]: energy level
+        z [float]: transformed x variable
+    OUTPUT:
+        dpsidx_sq [float]: integrand
+    """
+    newx = z/(1-z**2)
+    dpsidx_sq = (dpsidx(n, newx))**2*(1+z**2)/(1-z**2)**2
+    return dpsidx_sq
 
 def mean_xsq(n):
     """ Function to compute mean squared x between -inf and inf.
@@ -178,7 +190,7 @@ def mean_psq(n):
     OUTPUT:
         mean_psq [float]: mean momentum
     """
-    mean_psq = integrate(dpsidx, n)
+    mean_psq = integrate(dpsidx_sq, n)
     return mean_psq
     
 
