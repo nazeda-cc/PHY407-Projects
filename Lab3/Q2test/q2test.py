@@ -28,6 +28,7 @@ plt.legend()
 plt.xlabel('x', fontsize=15)
 plt.ylabel('$\psi_n(x)$', fontsize=15)
 plt.title('Wavefunctions for different n\'s')
+plt.show()
 
 # define array of new X's
 xrange = np.arange(-10, 10, 0.01)
@@ -38,6 +39,7 @@ plt.legend()
 plt.xlabel('x', fontsize=15)
 plt.ylabel('$\psi_n(x)$', fontsize=15)
 plt.title('Wavefunction for n = 30')
+plt.show()
 
 # calculate and print uncertainties in position and momentum, and energy
 for e in range(0, 16):
