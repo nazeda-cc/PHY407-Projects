@@ -11,7 +11,7 @@ from pylab import *
 from matplotlib.lines import Line2D
 from matplotlib import pyplot as plt
 import struct
-from Lab3_Q3_function import *
+from Lab03_Q3_function import *
 
 #target file name
 file = 'N46E006.hgt'

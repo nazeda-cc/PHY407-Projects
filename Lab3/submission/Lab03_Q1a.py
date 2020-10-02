@@ -8,7 +8,7 @@ import numpy as np
 import scipy as sp
 from scipy import special
 from matplotlib import pyplot as plt
-from Lab3_Q1a_function import *
+from Lab03_Q1a_function import *
 
 ######################## Q1a i ###################################
 n = 3

@@ -8,7 +8,7 @@ import numpy as np
 import scipy as sp
 from scipy import special
 from pylab import *
-from Lab3_Q1b_function import *
+from Lab03_Q1b_function import *
 from matplotlib.lines import Line2D
 from matplotlib import pyplot as plt
 
