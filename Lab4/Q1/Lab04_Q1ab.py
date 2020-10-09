@@ -4,7 +4,7 @@ Created on Sun Oct  4 14:21:53 2020
 
 @author: rundo
 """
-
+#%%
 import numpy as np
 import time
 from numpy.linalg import solve
@@ -33,7 +33,7 @@ xp = PartialPivot(A_in, v_in)
 print(x)
 print(xp)
 #########################################
-
+#%%
 ################## Q1b ###########################
 
 N = 300

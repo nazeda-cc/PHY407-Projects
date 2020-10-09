@@ -4,6 +4,7 @@ Created on Sun Oct  4 14:11:33 2020
 
 @author: rundo
 """
+#%%
 # SolveLinear.py
 # Python module for PHY407
 # Paul Kushner, 2015-09-26
@@ -55,7 +56,7 @@ def GaussElim(A_in, v_in):
             x[m] -= A[m, i]*x[i]
     return x
 
-
+#%%
 def PartialPivot(A_in, v_in):
     """ In this function, code the partial pivot (see Newman p. 222) """
     
