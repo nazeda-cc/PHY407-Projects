@@ -28,12 +28,12 @@ for i in range(int(0.02*len(spec)), len(spec)):
     
 dow_a = fft.irfft(spec)
 plt.figure(1)
-plt.plot(dow)
-plt.plot(dow_a, 'r', linewidth = 1)
+plt.plot(dow, label = 'Original data')
+plt.plot(dow_a, 'r', linewidth = 1, label = 'Smoothened data')
 plt.xlabel('Days')
 plt.ylabel('Dow Jones Industrial Average')
-plt.title('DFT')
-
+plt.title('Q1c, with DFT')
+plt.legend()
 #%%
 spec = dct(dow)
 for i in range(int(0.02*len(spec)), len(spec)):
@@ -41,8 +41,9 @@ for i in range(int(0.02*len(spec)), len(spec)):
     
 dow_a = idct(spec)
 plt.figure(2)
-plt.plot(dow)
-plt.plot(dow_a, 'r', linewidth = 1)
+plt.plot(dow, label = 'Original data')
+plt.plot(dow_a, 'r', linewidth = 1, label = 'Smoothened data')
 plt.xlabel('Days')
 plt.ylabel('Dow Jones Industrial Average')
-plt.title('DCT')
+plt.title('Q1c, with DCT')
+plt.legend()
