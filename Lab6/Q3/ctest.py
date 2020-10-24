@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Thu Oct 22 14:20:53 2020
+
+@author: rundo
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Tue Oct 20 20:54:09 2020
 
 @author: rundo
@@ -96,44 +103,47 @@ y_points = []
 
 #set iteration steps
 h = 0.01
-tpoints = np.arange(0, 20, h)
+tpoints = np.arange(0, 10, h)
 
 
 #append initial conditions
-for i in range(0, N):
+for i in range(0, 144):
     x_points.append([])
-    x_points[i].append(x_initial[i+64])
+    x_points[i].append(x_initial[i])
     y_points.append([])
-    y_points[i].append(y_initial[i+64])
+    y_points[i].append(y_initial[i])
 
 #initial v(t) and v(t+0.5h)
-vx = np.zeros(N, float)
-vy = np.zeros(N, float)
+vx = np.zeros(144, float)
+vy = np.zeros(144, float)
 
-vx_half = np.zeros(N, float)
-vy_half = np.zeros(N, float)
+vx_half = np.zeros(144, float)
+vy_half = np.zeros(144, float)
 
 
 x = x_initial
 y = y_initial
 
 #calculate the first v(t+0.5h)
-dvx, dvy = f_c(x_initial, y_initial)
-for i in range(N):
+dvx, dvy = f_ca(x_initial, y_initial)
+for i in range(144):
     vx_half[i] += 0.5 * h * dvx[i]
     vy_half[i] += 0.5 * h * dvy[i]
 
 #iteration begins   
 for t in tpoints:
-    for i in range(N):
+    for i in range(144):
 
-        x[i+64] = np.mod(x[i+64] + h * vx_half[i], 4)
-        y[i+64] = np.mod(y[i+64] + h * vy_half[i], 4)
-        #x[i+64] = x[i+64] + h * vx_half[i]
-        #y[i+64] = y[i+64] + h * vy_half[i]
+        x[i] = x[i] + h * vx_half[i]
+        y[i] = y[i] + h * vy_half[i]
+        
+        
+    kx, ky = f_ca(x, y)
+    for i in range(16):
+        x[i+64] = np.mod(x[i+64], 4)
+        y[i+64] = np.mod(y[i+64], 4)
     
     #update 8 imaginary shifted tiles
-    
     for i in range(N):
         x[i] = x[i+64] - 4
         x[i+16] = x[i+64]
@@ -152,25 +162,24 @@ for t in tpoints:
         y[i+96] = y[i+64] + 4
         y[i+112] = y[i+64] + 4
         y[i+128] = y[i+64] + 4
-        
-  
-    kx, ky = f_c(x, y)
+    
+    
     kx[:] = kx[:] * h
     ky[:] = ky[:] * h
     
-    for i in range(N):
+    for i in range(144):
         vx[i] = vx_half[i] + 0.5*kx[i]
         vy[i] = vy_half[i] + 0.5*ky[i]
         
         vx_half[i] += kx[i]
         vy_half[i] += ky[i]
         
-        x_points[i].append(x[i+64])
-        y_points[i].append(y[i+64])
+        x_points[i].append(x[i])
+        y_points[i].append(y[i])
 
 plt.figure(figsize=(10, 10))
 for i in range(N):
-    plt.plot(x_points[i], y_points[i])
+    plt.plot(x_points[i+64], y_points[i+64])
     
 
 plt.xlabel('$x$ axis', fontsize = 18)

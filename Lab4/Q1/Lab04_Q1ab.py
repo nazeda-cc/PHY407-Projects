@@ -59,8 +59,9 @@ for i in range(5, N):
     t_par.append(time.time() - t)
     
     t = time.time()
-    x_lu = solve(A, v)
-    t_lu.append(time.time() - t)
+    for i in range(50):
+        x_lu = solve(A, v)
+    t_lu.append((time.time() - t)/50)
     
     
     v_sol_gau = np.dot(A, x_gau)

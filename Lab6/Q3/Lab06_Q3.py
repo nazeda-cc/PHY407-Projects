@@ -7,6 +7,7 @@ Created on Mon Oct 19 22:46:09 2020
 
 import numpy as np
 from matplotlib import pyplot as plt
+import matplotlib.ticker as mtick
 from Lab06_Q3function import *
 
 
@@ -37,7 +38,7 @@ for i in range(0, N):
 #fx, fy = f(x_initial, y_initial)
 
 h = 0.01
-tpoints = np.arange(0, 100, h)
+tpoints = np.arange(0, 10, h)
 
 vx = np.zeros(N, float)
 vy = np.zeros(N, float)
@@ -88,23 +89,43 @@ for t in tpoints:
 total = []
 for i in range(len(uenergy)):
     total.append(uenergy[i]+kenergy[i])
+    
+diff = []
+for i in range(len(total)):
+    diff.append((total[i]-total[0])/total[0])
 
-plt.figure()
+
+plt.figure(figsize = (10, 10))
+sty = [None, None,None,None,None,None,None,None,None,'-.','-.','-.','-.','-.','-.','-.']
 for i in range(N):
-    plt.plot(x_points[i], y_points[i])
-#plt.legend()
+    plt.plot(x_points[i], y_points[i], label = '%i'%i, linestyle = sty[i])
+
+plt.scatter(x_initial, y_initial, c='k')
+plt.xlabel('$x$ axis', fontsize = 18)
+plt.ylabel('$y$ axis', fontsize = 18)
+plt.title('Q3a, Trajectories of all 16 particles', fontsize = 18)
+plt.legend()
 #plt.xlim(-8, 12)
 #plt.ylim(-8, 12)
 plt.show()
 
-plt.figure()
-plt.plot(uenergy)
-plt.plot(kenergy)
-plt.plot(total)
+plt.figure(figsize = (10, 8))
+plt.plot(uenergy, label = 'Potential Energy', linestyle = '-.')
+plt.plot(kenergy, label = 'Kinetic Energy', linestyle = '-.')
+plt.plot(total, label = 'Total energy of the system', color = 'r')
+plt.xlabel('Number of iterations', fontsize = 18)
+plt.ylabel('Energy value', fontsize = 18)
+plt.title('Q3b, Energy Plot', fontsize = 18)
+plt.legend()
 plt.show()
     
-    
-    
+plt.figure(figsize = (10,8))
+plt.plot(diff, linewidth = 2)
+plt.xlabel('Number of iterations', fontsize = 18)
+plt.ylabel('Difference of energy respect to the initial value', fontsize = 18)
+plt.title('Q3b, Difference in Energy', fontsize = 18)
+plt.ylim(-0.01, 0.01)
+plt.gca().set_yticklabels(['{:.0f}%'.format(x*100) for x in plt.gca().get_yticks()]) 
 
     
     
