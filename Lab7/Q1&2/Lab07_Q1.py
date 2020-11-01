@@ -13,7 +13,7 @@ from time import time
 
 
 ###############################################################################
-###########################  Part (a) #########################################
+###########################  Part (a) and (b) #################################
 ###############################################################################
 
 ###############################################################################
@@ -55,14 +55,13 @@ for t in tpoints:
 end = time()
 dtime = end - start
 # Output running time.
-print('The time taken by RK4 is ', dtime, ' seconds.')
+print('The time taken by original RK4 is %.3f seconds.'%dtime)
  
 # visualize the orbit
 plt.figure(figsize=(8, 8))
 plt.plot(xpoints, ypoints, 'b.', lw=1, label='Original RK4')
 plt.scatter(x0, y0, c='k', marker='x', s=500, label='Initial position')
 plt.grid()
-plt.legend()
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.title('Comparison between RK4 without and with adaptive step sizes')
@@ -132,10 +131,16 @@ while t < 10:
 end = time()
 dtime = end - start
 # Output running time.
-print('The time taken by adaptive RK4 is ', dtime, ' seconds.')
+print('The time taken by adaptive RK4 is %.3f seconds.'%dtime)
 
 # visualize the orbit
 plt.plot(xpoints, ypoints, 'r.', lw=30, label='Adaptive RK4')
+plt.legend()
+
+
+###############################################################################
+###########################  Part (c) #########################################
+###############################################################################
 
 plt.figure(figsize=(8, 8))
 plt.plot(tpoints, stepsize, lw=3)
