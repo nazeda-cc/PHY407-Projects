@@ -11,15 +11,14 @@ from Lab07_Q3function import *
 
 
 
-tsize = 10000
-target = e/tsize
+
 x = np.arange(h, L, h)
 x_plot = x/a
 
 ##############################################################
 n = 1
 l = 0
-print('For n=1, l=0, with stepsize = %fa,'%size, 'target size = e/%i'%tsize)
+print('For n=1, l=0, with max range = %ia,'%maxi, 'stepsize = %fa,'%size, 'target size = e/%i'%tsize)
 print('The calculated energy eigen value is:')
 E1 = -15*e/n**2
 E2 = -13*e/n**2
@@ -51,7 +50,7 @@ plt.show()
 ###########################################################
 n = 2
 l = 0
-print('For n=2, l=0, with stepsize = %fa,'%size, 'target size = e/%i'%tsize)
+print('For n=2, l=0, with max range = %ia,'%maxi, 'stepsize = %fa,'%size, 'target size = e/%i'%tsize)
 print('The calculated energy eigen value is:')
 E1 = -15*e/n**2
 E2 = -13*e/n**2
@@ -66,7 +65,7 @@ while abs(E1-E2)>target:
   
 
 norm_simp2 = np.sqrt(normalize_simp(p2))
-print(E2/e)
+print(E2/e,'eV')
 
 print('----------------------------------')
 
@@ -84,7 +83,7 @@ plt.show()
 ##############################################################
 n = 2
 l = 1
-print('For n=2, l=1, with stepsize = %fa,'%size, 'target size = e/%i'%tsize)
+print('For n=2, l=1, with max range = %ia,'%maxi, 'stepsize = %fa,'%size, 'target size = e/%i'%tsize)
 print('The calculated energy eigen value is:')
 E1 = -15*e/n**2
 E2 = -13*e/n**2
@@ -99,7 +98,7 @@ while abs(E1-E2)>target:
 
 
 norm_simp3 = np.sqrt(normalize_simp(p3))
-print(E2/e)
+print(E2/e,'eV')
 print('----------------------------------')
 norm = np.sqrt(Simp(R_2_1, h, L, len(p3)))
 plt.figure(3, figsize = (8,8))

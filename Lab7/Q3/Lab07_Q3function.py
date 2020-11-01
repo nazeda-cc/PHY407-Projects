@@ -7,7 +7,13 @@ Created on Thu Oct 29 16:11:43 2020
 import numpy as np
 from matplotlib import pyplot as plt
 #set constants
-global m, a, e, hbar, sigma, h, L, size, tsize
+global m, a, e, hbar, sigma, h, L, size, tsize, target
+
+maxi = 30
+size = 0.0005
+tsize = 100000
+
+
 
 m = 9.1094e-31
 
@@ -16,10 +22,14 @@ hbar = 1.0546e-34
 e = 1.6022e-19
 sigma = 8.854e-12
 
-size = 0.0005
+
+
 a = 5.29e-11
 h = size * a
-L = 20 * a
+L = maxi * a
+
+
+target = e/tsize
 
 
 def V(r):
