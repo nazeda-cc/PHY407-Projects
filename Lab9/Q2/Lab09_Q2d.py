@@ -9,7 +9,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 from Lab09_Q2functions import *
 
-
+#Set all constants
 P = 16
 Lx = 1
 Ly = 1
@@ -22,11 +22,15 @@ n = 1
 c = 1
 omega = 3.75
 
+
+#initiate grids
 x = np.linspace(0, Lx, P)
 y = np.linspace(0, Ly, P)
 
 x_points, y_points = np.meshgrid(x, y)
 
+
+#initiate arrays for J, H, E
 Jz = np.zeros((P, P))
 Hx = np.zeros((P, P))
 Hy = np.zeros((P, P))
@@ -52,14 +56,16 @@ time =   np.arange(0, T+tau, tau)
 
 Dx = np.pi*c*tau / (2*Lx)
 Dy = np.pi*c*tau / (2*Ly)
-#plt.figure(figsize = (8, 6))
-E_max_trace = []
-d_omega = 0.1
 
+E_max_trace = []
+d_omega = 0.5   #set step size for omega
+
+
+#loop for all omega values
 for omega in np.arange(0,9+d_omega, d_omega):
-    #E_trace = []
+
     
-    
+    #reset values of J, H, E
     Jz = np.zeros((P, P))
     Hx = np.zeros((P, P))
     Hy = np.zeros((P, P))
@@ -78,6 +84,8 @@ for omega in np.arange(0,9+d_omega, d_omega):
     Emax = 0
     
     print(omega)
+    
+    #temparol loop
     for t in time:
     
     
@@ -88,6 +96,7 @@ for omega in np.arange(0,9+d_omega, d_omega):
         Ehat = dst2(E)
         J = dst2(Jz)
 
+        #Crank-Nicolson scheme
         for q in range(P):
             for p in range(P):
                 Ehat_new[q][p] = ((1 - (p**2)*(Dx**2) - (q**2)*(Dy**2)) * Ehat[q][p] \
@@ -101,23 +110,21 @@ for omega in np.arange(0,9+d_omega, d_omega):
         E = idst2(Ehat_new)
         Hx = idHxt2(X_new)
         Hy = idHyt2(Y_new)
-    
+        
+        #update max value
         if abs(E[P//2][P//2]) > Emax:
             Emax = E[P//2][P//2]
         
-        #E_trace.append(E[P//2][P//2])
     
-    #print(len(E_trace))
+    #append Emax for each omega
     E_max_trace.append(abs(Emax))
     print(E_max_trace[-1])
     
     
 
     
-    #plt.pcolormesh(x, y, E)
-    #plt.colorbar()
-    #plt.show()
 
+#plot
 plt.figure(figsize = (8,8))
 plt.plot(np.arange(0,9+d_omega,d_omega), E_max_trace)
 plt.xlabel('Driven frequency ($\omega$)')
@@ -126,11 +133,3 @@ plt.title('Q2d, Maximum apmplitude vs Driven frequency plot')
 plt.grid(True)
 plt.show()
 
-''' 
-plt.figure(figsize = (6, 6))
-plt.plot(time, Hx_trace, label = 'Hx')
-plt.plot(time, Hy_trace, label = 'Hy')
-plt.plot(time, E_trace, label = 'E')
-plt.legend()
-plt.show()
-'''

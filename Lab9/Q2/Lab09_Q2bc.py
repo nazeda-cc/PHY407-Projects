@@ -9,7 +9,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 from Lab09_Q2functions import *
 
-
+#Set all constants
 P = 32
 Lx = 1
 Ly = 1
@@ -22,11 +22,13 @@ n = 1
 c = 1
 omega = 3.75
 
+#initiate grids
 x = np.linspace(0, Lx, P)
 y = np.linspace(0, Ly, P)
 
 x_points, y_points = np.meshgrid(x, y)
 
+#initiate arrays for J, H, E
 Jz = np.zeros((P, P))
 Hx = np.zeros((P, P))
 Hy = np.zeros((P, P))
@@ -50,17 +52,20 @@ time =   np.arange(0, T+tau, tau)
 
 Dx = np.pi*c*tau / (2*Lx)
 Dy = np.pi*c*tau / (2*Ly)
-#plt.figure(figsize = (8, 6))
+
+#temporal loop
 for t in time:
     
-    
+    #current
     Jz = J0 * np.sin(m*np.pi*x_points/Lx) * np.sin(n*np.pi*y_points/Ly)*np.sin(omega*t)
     
+    #transform into k space
     X = dHxt2(Hx)
     Y = dHyt2(Hy)
     Ehat = dst2(E)
     J = dst2(Jz)
-
+    
+    #Crank-Nicolson scheme
     for q in range(P):
         for p in range(P):
             Ehat_new[q][p] = ((1 - (p**2)*(Dx**2) - (q**2)*(Dy**2)) * Ehat[q][p] \
@@ -70,11 +75,13 @@ for t in time:
             X_new[q][p] = X[q][p] - q*Dy*(Ehat_new[q][p] + Ehat[q][p])
             Y_new[q][p] = Y[q][p] - p*Dx*(Ehat_new[q][p] + Ehat[q][p])
             
-    #Jz = idst2(J_new)
+    
+    #transform back to physics space
     E = idst2(Ehat_new)
     Hx = idHxt2(X_new)
     Hy = idHyt2(Y_new)
     
+    #append trace
     Hx_trace.append(Hx[0][P//2])
     Hy_trace.append(Hy[P//2][0])
     E_trace.append(E[P//2][P//2])
@@ -82,13 +89,11 @@ for t in time:
     
 
     
-    #plt.pcolormesh(x, y, E)
-    #plt.colorbar()
-    #plt.show()
 
 
 
- 
+
+'''
 plt.figure(figsize = (6, 6))
 plt.plot(time, Hx_trace, label = 'Hx')
 plt.xlabel('Time ($t$)')
@@ -112,7 +117,9 @@ plt.ylabel('$E_z$')
 plt.title('Q2e, Plot of $E_z$ at (0.5, 0.5), $\omega = \omega_0^{1,1}$')
 plt.grid(True)
 plt.show()
+'''
 
+#plot
 plt.figure(figsize = (6, 6))
 plt.plot(time, Hx_trace, label = '$H_x$')
 plt.plot(time, Hy_trace, label = '$H_y$')
@@ -124,8 +131,20 @@ plt.grid(True)
 plt.legend()
 plt.show()
 
+#perform fourier transform to analysis the signal
+frequency = np.fft.fft(E_trace)
+plt.figure(figsize=(6, 6))
+plt.plot(np.abs(frequency))
+plt.xlabel('k')
+plt.ylabel('Intensity')
+plt.title('Q2e, Frourier analysis on $E_z$')
+plt.grid(True)
+plt.show()
+
 
 #%% Transform testing code for Q2b
+
+N = 8
 Hx = np.random.rand(N, N)
 Hx[:, 0] = 0
 Hx[:, -1] = 0
