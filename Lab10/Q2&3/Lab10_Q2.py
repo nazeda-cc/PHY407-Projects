@@ -21,22 +21,19 @@ def volume(dim, N):
             
     return count * 2**dim / N
         
-d = 20
+d = 10          #set dimension
 
-N = 1000000
-
-
-#expect value for V, <V>
+N = 1000000     #number of sampling points
 
 V = np.empty(0)
-n_v = 10
+
+
+n_v = 30        # time of iterations
 
 for i in range(n_v):
     V = np.append(V, volume(d, N))
 
-    
-v_avg = np.average(V)
-v2_avg = np.average(V**2)
-print('<V>=', v_avg)
-print('<V^2>', v2_avg)
-print('var V=', np.sqrt(v2_avg - v_avg**2))
+
+# numerical standard deviation and volume result
+print('Standard deviation in V is:', np.std(V))
+print('The average volume V of the hyper-sphere is:', np.average(V))
