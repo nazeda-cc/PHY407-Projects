@@ -29,7 +29,7 @@ def f(x, y):
     return np.cos(x) + np.cos(np.sqrt(2)*x) + np.cos(np.sqrt(3)*x) + (y-1)**2
 
 Tmax = 100.0
-Tmin = 1e-5
+Tmin = 1e-6
 tau = 1e4
 
 x = 25
@@ -66,15 +66,22 @@ while T > Tmin:
         y_trace.append(y)
         T_trace.append(T)
     
-print(x, y)
+print('Optimized x value is:', x)
+print('Optimized y value is:', y)
 plt.figure()
 plt.plot(T_trace, x_trace, '.')
-plt.axis([Tmax, Tmin, max(x_trace)+1, min(x_trace)-1])
+plt.axis([Tmax, Tmin, min(x_trace)-1, max(x_trace)+1])
+plt.xlabel('Temperature')
+plt.ylabel('x value')
+plt.title('Q1b ii, x value while the system is cooling')
 plt.semilogx()
 
 
 
 plt.figure()
 plt.plot(T_trace, y_trace, '.')
-plt.axis([Tmax, Tmin, max(y_trace)+1, min(y_trace)-1])
+plt.axis([Tmax, Tmin, min(y_trace)-1, max(y_trace)+1])
+plt.xlabel('Temperature')
+plt.ylabel('y value')
+plt.title('Q1b ii, y value while the system is cooling')
 plt.semilogx()

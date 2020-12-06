@@ -11,13 +11,9 @@ from random import random,randrange, seed
 #from visual import sphere,curve,display
 from matplotlib import pyplot as plt
 from matplotlib.lines import Line2D
+import numpy as np
 
-seed(10)
-N = 25
-R = 0.02
-Tmax = 10.0
-Tmin = 1e-2
-tau = 1e4
+
 
 # Function to calculate the magnitude of a vector
 def mag(x):
@@ -31,15 +27,11 @@ def distance():
     return s
 
 # Choose N city locations and calculate the initial distance
-r = empty([N+1,2],float)
-for i in range(N):
-    r[i,0] = random()
-    r[i,1] = random()
-r[N] = r[0]
-D = distance()
+
 
 # Set up the graphics
-plt.figure(figsize = (8, 8))
+'''
+plt.figure(1, figsize = (8, 8))
 #display(center=[0.5,0.5])
 for i in range(N):
     
@@ -50,64 +42,86 @@ for i in range(N):
 
     plt.plot([r[i][0], r[i+1][0]], [r[i][1], r[i+1][1]], color = 'k', linewidth = 1)
 
-
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Initial path with seed=100214')
 plt.show()
-
-print(distance())
+'''
+#init_d = distance()
+#print('Initial', distance())
 # Main loop
-seed(12)
-t = 0
-T = Tmax
-while T>Tmin:
+optD = []
+for power in range(1, 11):
+    
+    seed(100214)
+    N = 25
+    R = 0.02
+    Tmax = 10.0
+    Tmin = 1e-3
+    tau = 1e2
+    
+    r = empty([N+1,2],float)
+    for i in range(N):
+        r[i,0] = random()
+        r[i,1] = random()
+    r[N] = r[0]
+    D = distance()
+    
+    
+    
+    
+    s = 2**power
+    seed(s)
+    t = 0
+    T = Tmax
+    while T>Tmin:
 
-    # Cooling
-    t += 1
-    T = Tmax*exp(-t/tau)
+        # Cooling
+        t += 1
+        T = Tmax*exp(-t/tau)
 
     # Update the visualization every 100 moves
-    '''
-    if t%10000==0:
-        plt.figure(figsize = (8, 8))
 
-        for i in range(N):
-    
-            if i == 0:
-                plt.scatter(r[i, 0], r[i, 1], color = 'r', s = 60)
-            else:
-                plt.scatter(r[i, 0], r[i, 1], color = 'c', s = 60)
-
-            plt.plot([r[i][0], r[i+1][0]], [r[i][1], r[i+1][1]], color = 'k', linewidth = 1)
-
-
-        plt.show()
-        '''
-
-    # Choose two cities to swap and make sure they are distinct
-    i,j = randrange(1,N),randrange(1,N)
-    while i==j:
+        # Choose two cities to swap and make sure they are distinct
         i,j = randrange(1,N),randrange(1,N)
+        while i==j:
+            i,j = randrange(1,N),randrange(1,N)
 
     # Swap them and calculate the change in distance
-    oldD = D
-    r[i,0],r[j,0] = r[j,0],r[i,0]
-    r[i,1],r[j,1] = r[j,1],r[i,1]
-    D = distance()
-    deltaD = D - oldD
-
-    # If the move is rejected, swap them back again
-    if random()>exp(-deltaD/T):
+        oldD = D
         r[i,0],r[j,0] = r[j,0],r[i,0]
         r[i,1],r[j,1] = r[j,1],r[i,1]
+        D = distance()
+        deltaD = D - oldD
 
-plt.figure(figsize = (8, 8))
+    # If the move is rejected, swap them back again
+        if random()>exp(-deltaD/T):
+            r[i,0],r[j,0] = r[j,0],r[i,0]
+            r[i,1],r[j,1] = r[j,1],r[i,1]
+            D = oldD
 
-for i in range(N):
+
+    optD.append(distance())
+    plt.figure(2, figsize = (8, 8))
+
+    for i in range(N):
     
-    if i == 0:
-        plt.scatter(r[i, 0], r[i, 1], color = 'r', s = 60)
-    else:
-        plt.scatter(r[i, 0], r[i, 1], color = 'c', s = 60)
+        if i == 0:
+            plt.scatter(r[i, 0], r[i, 1], color = 'r', s = 60)
+        else:
+            plt.scatter(r[i, 0], r[i, 1], color = 'c', s = 60)
 
-    plt.plot([r[i][0], r[i+1][0]], [r[i][1], r[i+1][1]], color = 'k', linewidth = 1)
-plt.show()
-print(distance())
+        plt.plot([r[i][0], r[i+1][0]], [r[i][1], r[i+1][1]], color = 'k', linewidth = 1)
+    
+    plt.title('Final path with seed=%i, '%s + 'tau = %i'%tau, fontsize = 20)
+    plt.show()
+    end_d = distance()
+    #print('Initial', init_d)
+    #print('Seed = %i, Optimized:'%s, distance())
+    print(s, '&', distance(), '\\')
+    print('\hline')
+    #print('Difference:', init_d-end_d)
+
+print(optD)
+print(np.average(optD))
+print(np.std(optD))

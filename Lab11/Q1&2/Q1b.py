@@ -54,20 +54,27 @@ while T > Tmin:
         x -= dx
         y -= dy
         
-    if t%1000==0:
+    if t%500==0:
         x_trace.append(x)
         y_trace.append(y)
         T_trace.append(T)
     
-print(x, y)
+print('Optimized x value is:', x)
+print('Optimized y value is:', y)
 plt.figure()
 plt.plot(T_trace, x_trace, '.')
-plt.axis([Tmax, Tmin, max(x_trace)+1, min(x_trace)-1])
+plt.axis([Tmax, Tmin, min(x_trace)+1, max(x_trace)-1])
+plt.xlabel('Temperature')
+plt.ylabel('x value')
+plt.title('Q1b i, x value while the system is cooling')
 plt.semilogx()
 
 
 
 plt.figure()
 plt.plot(T_trace, y_trace, '.')
-plt.axis([Tmax, Tmin, max(y_trace)+1, min(y_trace)-1])
+plt.axis([Tmax, Tmin, min(y_trace)+1, max(y_trace)-1])
+plt.xlabel('Temperature')
+plt.ylabel('y value')
+plt.title('Q1b i, y value while the system is cooling')
 plt.semilogx()
